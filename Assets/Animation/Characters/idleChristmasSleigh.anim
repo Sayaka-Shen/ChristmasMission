@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MovementChristmasSleigh
+  m_Name: idleChristmasSleigh
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -2820592509149484933, guid: ec5facf2a6f1f6c44849341a88fe662a, type: 3}
-    - time: 0.21666667
-      value: {fileID: 1251144065436878595, guid: ec5facf2a6f1f6c44849341a88fe662a, type: 3}
+      value: {fileID: 4704871556083185227, guid: 678be856bd367244aba8887c651869ca, type: 3}
     - time: 0.5
       value: {fileID: 4704871556083185227, guid: 678be856bd367244aba8887c651869ca, type: 3}
     attribute: m_Sprite
-    path: Santa Claus_0
+    path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -39,7 +37,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 4169554847
+      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -48,8 +46,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -2820592509149484933, guid: ec5facf2a6f1f6c44849341a88fe662a, type: 3}
-    - {fileID: 1251144065436878595, guid: ec5facf2a6f1f6c44849341a88fe662a, type: 3}
+    - {fileID: 4704871556083185227, guid: 678be856bd367244aba8887c651869ca, type: 3}
     - {fileID: 4704871556083185227, guid: 678be856bd367244aba8887c651869ca, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2

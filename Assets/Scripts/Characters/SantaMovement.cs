@@ -11,6 +11,10 @@ public class SantaMovement : MonoBehaviour
     [Header("Movement Stats")]
     [SerializeField] private float _santaSpeed = 5f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    private Vector2 _realDir;
+    
+    [Header("Animation")]
+    [SerializeField] private Animator _animator;
     
     // Movement Routine 
     private Coroutine MovementCoroutine { get; set; }
@@ -18,12 +22,14 @@ public class SantaMovement : MonoBehaviour
     private void Start()
     {
         _moveInput.action.started += StartMovement;
+        _moveInput.action.performed += InMovement;
         _moveInput.action.canceled += StopMovement;
     }
 
     private void OnDestroy()
     {
         _moveInput.action.started -= StartMovement;
+        _moveInput.action.performed -= InMovement;
         _moveInput.action.canceled -= StopMovement;
     }
 
@@ -35,17 +41,26 @@ public class SantaMovement : MonoBehaviour
             while (true)
             {
                 Vector2 direction = obj.ReadValue<Vector2>();
-                Vector2 realDir = new Vector2(direction.x, direction.y);
-                _rigidbody2D.linearVelocity = realDir * _santaSpeed;
+                _realDir = new Vector2(direction.x, direction.y);
+                _rigidbody2D.linearVelocity = _realDir * _santaSpeed;
+                
+                _animator.SetBool("IsMoving", true);
                 
                 yield return null;
             }
         }
     }
 
+    private void InMovement(InputAction.CallbackContext obj)
+    {
+        
+    }
+
     private void StopMovement(InputAction.CallbackContext obj)
     {
         _rigidbody2D.linearVelocity = Vector2.zero;
+        
+        _animator.SetBool("IsMoving", false);
         
         StopCoroutine(MovementCoroutine);
         MovementCoroutine = null;
