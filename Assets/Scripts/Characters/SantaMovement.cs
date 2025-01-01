@@ -22,14 +22,12 @@ public class SantaMovement : MonoBehaviour
     private void Start()
     {
         _moveInput.action.started += StartMovement;
-        _moveInput.action.performed += InMovement;
         _moveInput.action.canceled += StopMovement;
     }
 
     private void OnDestroy()
     {
         _moveInput.action.started -= StartMovement;
-        _moveInput.action.performed -= InMovement;
         _moveInput.action.canceled -= StopMovement;
     }
 
@@ -49,11 +47,6 @@ public class SantaMovement : MonoBehaviour
                 yield return null;
             }
         }
-    }
-
-    private void InMovement(InputAction.CallbackContext obj)
-    {
-        
     }
 
     private void StopMovement(InputAction.CallbackContext obj)
