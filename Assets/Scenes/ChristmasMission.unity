@@ -264,7 +264,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432342054}
-  - component: {fileID: 432342055}
   - component: {fileID: 432342056}
   - component: {fileID: 432342058}
   - component: {fileID: 432342057}
@@ -294,22 +293,6 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &432342055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432342053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6251456226296b241a81369104053504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveInput: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _santaSpeed: 5
-  _rigidbody2D: {fileID: 432342056}
-  _animator: {fileID: 973533613}
 --- !u!50 &432342056
 Rigidbody2D:
   serializedVersion: 5
@@ -368,6 +351,7 @@ MonoBehaviour:
   _santaSpeed: 3
   _santaRigidBody: {fileID: 432342056}
   _animator: {fileID: 973533613}
+  _gameTimer: {fileID: 991213638}
 --- !u!1 &440427626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991213636}
   - component: {fileID: 991213637}
+  - component: {fileID: 991213638}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1436,6 +1421,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f3a74dfc8aea8408feaf51e9bdc494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &991213638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991213635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf36534f455dc044fadc766c9825e26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeRemaining: 180
 --- !u!1 &1152546927
 GameObject:
   m_ObjectHideFlags: 0
