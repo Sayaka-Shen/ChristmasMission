@@ -6,29 +6,29 @@ using UnityEngine.InputSystem;
 public class SantaMovement : MonoBehaviour
 {
     [Header("Input Movement")]
-    [SerializeField] private InputActionReference _moveInput;
+    [SerializeField] private InputActionReference moveInput;
     
     [Header("Movement Stats")]
-    [SerializeField] private float _santaSpeed = 5f;
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private float santaSpeed = 5f;
+    [SerializeField] private Rigidbody2D rb2D;
     private Vector2 _realDir;
     
     [Header("Animation")]
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator animator;
     
     // Movement Routine 
     private Coroutine MovementCoroutine { get; set; }
 
     private void Start()
     {
-        _moveInput.action.started += StartMovement;
-        _moveInput.action.canceled += StopMovement;
+        moveInput.action.started += StartMovement;
+        moveInput.action.canceled += StopMovement;
     }
 
     private void OnDestroy()
     {
-        _moveInput.action.started -= StartMovement;
-        _moveInput.action.canceled -= StopMovement;
+        moveInput.action.started -= StartMovement;
+        moveInput.action.canceled -= StopMovement;
     }
 
     private void StartMovement(InputAction.CallbackContext obj)
@@ -40,9 +40,9 @@ public class SantaMovement : MonoBehaviour
             {
                 Vector2 direction = obj.ReadValue<Vector2>();
                 _realDir = new Vector2(direction.x, direction.y);
-                _rigidbody2D.linearVelocity = _realDir * _santaSpeed;
+                rb2D.linearVelocity = _realDir * santaSpeed;
                 
-                _animator.SetBool("IsMoving", true);
+                animator.SetBool("IsMoving", true);
                 
                 yield return null;
             }
@@ -51,9 +51,9 @@ public class SantaMovement : MonoBehaviour
 
     private void StopMovement(InputAction.CallbackContext obj)
     {
-        _rigidbody2D.linearVelocity = Vector2.zero;
+        rb2D.linearVelocity = Vector2.zero;
         
-        _animator.SetBool("IsMoving", false);
+        animator.SetBool("IsMoving", false);
         
         StopCoroutine(MovementCoroutine);
         MovementCoroutine = null;

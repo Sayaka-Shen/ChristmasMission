@@ -4,9 +4,9 @@ using UnityEngine.Tilemaps;
 public class BackgroundLoop : MonoBehaviour
 {
     [Header("Loop Settings")]
-    [SerializeField] private GameObject[] _backgroundsElements;
-    [SerializeField] private float _backgroundChoke;
-    [SerializeField] private float _tileMapChoke;
+    [SerializeField] private GameObject[] backgroundElements;
+    [SerializeField] private float backgroundChoke;
+    [SerializeField] private float tileMapChoke;
     private Camera _mainCamera;
     private Vector2 _screenBounds;
     private float _objectWidth = 0f;
@@ -18,7 +18,7 @@ public class BackgroundLoop : MonoBehaviour
         _mainCamera = gameObject.GetComponent<Camera>();
         _screenBounds = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.transform.position.z));
 
-        foreach (GameObject obj in _backgroundsElements)
+        foreach (GameObject obj in backgroundElements)
         {
             LoadChildObjects(obj);
         }
@@ -26,7 +26,7 @@ public class BackgroundLoop : MonoBehaviour
 
     private void LateUpdate()
     {
-        foreach (GameObject obj in _backgroundsElements)
+        foreach (GameObject obj in backgroundElements)
         {
             RepositionChildObjects(obj);
         }
@@ -36,11 +36,11 @@ public class BackgroundLoop : MonoBehaviour
     {
         if (obj.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
         {
-            _objectWidth = spriteRenderer.bounds.size.x - _backgroundChoke;
+            _objectWidth = spriteRenderer.bounds.size.x - backgroundChoke;
         }
         else if (obj.TryGetComponent<TilemapRenderer>(out TilemapRenderer tilemapRenderer))
         {
-            _objectWidth = tilemapRenderer.bounds.size.x - _tileMapChoke;
+            _objectWidth = tilemapRenderer.bounds.size.x - tileMapChoke;
         }
         
         int childNecessary = (int)Mathf.Ceil(_screenBounds.x * 2 / _objectWidth);
@@ -69,11 +69,11 @@ public class BackgroundLoop : MonoBehaviour
             
             if (lastChild.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
             {
-                _halfObjectWidth = spriteRenderer.bounds.extents.x - _backgroundChoke;
+                _halfObjectWidth = spriteRenderer.bounds.extents.x - backgroundChoke;
             }
             else if (lastChild.TryGetComponent<TilemapRenderer>(out TilemapRenderer tilemapRenderer))
             {
-                _halfObjectWidth = tilemapRenderer.bounds.extents.x - _tileMapChoke;
+                _halfObjectWidth = tilemapRenderer.bounds.extents.x - tileMapChoke;
             }
 
             if (transform.position.x + _screenBounds.x > lastChild.transform.position.x + _halfObjectWidth)

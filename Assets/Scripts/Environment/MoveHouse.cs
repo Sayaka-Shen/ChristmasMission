@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoveHouse : MonoBehaviour
 {
     [Header("Move Settings")] 
-    [SerializeField] private float _houseSpeed = 1f;
+    [SerializeField] private float houseSpeed = 1f;
     
     [Header("Difficulty Settings")]
     private GameTimer _gameTimer;
@@ -19,32 +19,31 @@ public class MoveHouse : MonoBehaviour
     
     private void Update()
     {
-        _houseSpeed = ManageHouseSpeedDifficulty();
+        houseSpeed = ManageHouseSpeedDifficulty();
         
-        transform.position += Vector3.left * _houseSpeed * Time.deltaTime;
+        transform.position += Vector3.left * houseSpeed * Time.deltaTime;
     }
 
     private float ManageHouseSpeedDifficulty()
     {
         if (_gameTimer.TimeRemaining <= _gameTimer.FirstSpeedUp && !_hasFirstSpeedIncreased)
         {
-            Debug.Log("La vitesse de Santa augmente !");
-            _houseSpeed *= 2;
+            houseSpeed *= 2;
             _hasFirstSpeedIncreased = true;
         }
     
         if (_gameTimer.TimeRemaining <= _gameTimer.SecondSpeedUp && !_hasSecondSpeedIncreased)
         {
-            Debug.Log("La vitesse de Santa augmente encore !");
-            _houseSpeed += 2;
+            houseSpeed += 2;
             _hasSecondSpeedIncreased = true;
         }
     
         if (_gameTimer.TimeRemaining <= 0 && !_gameEnd)
         {
+            houseSpeed = 0;
             _gameEnd = true;
         }
     
-        return _houseSpeed;
+        return houseSpeed;
     }
 }

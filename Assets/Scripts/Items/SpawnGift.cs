@@ -6,39 +6,40 @@ using UnityEngine.InputSystem;
 public class SpawnGift : MonoBehaviour
 {
     [Header("Prefab References")]
-    [SerializeField] private GameObject _giftPrefab;
+    [SerializeField] private GameObject giftPrefab;
     private GameObject _giftInstance;
     
     [Header("Spawn Gift Settings")]
-    [SerializeField] private GameObject _spawnZone;
-    [SerializeField] private GameObject _giftParent;
+    [SerializeField] private GameObject spawnZone;
+    [SerializeField] private GameObject giftParent;
     private bool _canSpawnGift = true;
     
     [Header("Throw Input")]
-    [SerializeField] private InputActionReference _throwInput;
+    [SerializeField] private InputActionReference throwInput;
 
     private void Start()
     {
-        _throwInput.action.started += StartThrow;
+        throwInput.action.started += StartThrow;
     }
 
     private void OnDestroy()
     {
-        _throwInput.action.started -= StartThrow;
+        throwInput.action.started -= StartThrow;
     }
 
     private void StartThrow(InputAction.CallbackContext context)
     {
         if (_canSpawnGift)
         {
-            _giftInstance = Instantiate(_giftPrefab, _spawnZone.transform);
-            _giftInstance.transform.SetParent(_giftParent.transform);    
+            _giftInstance = Instantiate(giftPrefab, spawnZone.transform);
+            _giftInstance.transform.SetParent(giftParent.transform);    
             _canSpawnGift = false;
+            
+            SoundManager.Instance.PlaySound3D("GiftDrop", transform.position);
             
             StartCoroutine(DeleteGift());
         }
     }
-
 
     IEnumerator DeleteGift()
     {

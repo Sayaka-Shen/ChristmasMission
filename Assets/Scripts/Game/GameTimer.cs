@@ -1,15 +1,25 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
     [Header("Timer Settings")] 
-    [SerializeField] private float _timeRemaining;
+    [SerializeField] private float timeRemaining;
+    [SerializeField] private TextMeshProUGUI timerText;
     private bool _isTimeRunning = false;
     
     [Header("Difficulty Settings")]
-    private float _firstSpeedUp = 120;
-    private float _secondSpeedUp = 60;
+    private float _firstSpeedUp = 90;
+    private float _secondSpeedUp = 30;
+    
+    [Header("End Menu Settings")]
+    [SerializeField] private GameObject endMenu;
+    [SerializeField] private TextMeshProUGUI pointMade;
+    [SerializeField] private PointSystem pointSystem;
+    
 
     public float FirstSpeedUp
     {
@@ -23,7 +33,7 @@ public class GameTimer : MonoBehaviour
 
     public float TimeRemaining
     {
-        get { return _timeRemaining; }
+        get { return timeRemaining; }
     }
     
     private void Start()
@@ -33,22 +43,29 @@ public class GameTimer : MonoBehaviour
 
     private void Update()
     {
+        TimerLoop();
+    }
+
+    private void TimerLoop()
+    {
         if (_isTimeRunning)
         {
-            if (_timeRemaining > 0)
+            if (timeRemaining > 0)
             {
-                _timeRemaining -= Time.deltaTime;
+                timeRemaining -= Time.deltaTime;
+                timerText.text = ConvertToClassicTime(timeRemaining);
             }
             else
             {
-                Debug.Log("Time has run out !");
-                _timeRemaining = 0;
+                timeRemaining = 0;
                 _isTimeRunning = false;
+                timerText.text = "";
+                
+                AddEndMenu();
+
+                StartCoroutine(WaitForThePlayerToSeeResult());
             }
         }
-        
-        
-        Debug.Log(ConvertToClassicTime(_timeRemaining));
     }
 
     private string ConvertToClassicTime(float time)
@@ -59,5 +76,18 @@ public class GameTimer : MonoBehaviour
         string classicTime = string.Format("{0:00}:{1:00}", minutes, seconds);
         
         return classicTime;
+    }
+
+    private void AddEndMenu()
+    {
+        endMenu.SetActive(true);
+        pointMade.text = "Points Obtenus: " + pointSystem.TotalPoints.ToString();
+    }
+
+    IEnumerator WaitForThePlayerToSeeResult()
+    {
+        yield return new WaitForSeconds(5f);
+
+        SceneManager.LoadScene("StartMenu");
     }
 }
