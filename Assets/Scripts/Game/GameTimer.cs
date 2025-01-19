@@ -87,7 +87,7 @@ public class GameTimer : MonoBehaviour
 
     IEnumerator WaitForThePlayerToSeeResult()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSecondsRealtime(5f);
 
         SceneManager.LoadScene("StartMenu");
     }
