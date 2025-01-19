@@ -15,4 +15,10 @@ public class PointSystem : MonoBehaviour
         _totalPoints += pointsAdded;
         pointText.text = _totalPoints.ToString();
     }
+
+    public void RemovePoints(int pointsRemoved)
+    {
+        _totalPoints -= pointsRemoved;
+        pointText.text = _totalPoints.ToString();
+    }
 }

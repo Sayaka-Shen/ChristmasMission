@@ -37,18 +37,13 @@ public class SpawnGift : MonoBehaviour
             
             SoundManager.Instance.PlaySound3D("GiftDrop", transform.position);
             
-            StartCoroutine(DeleteGift());
+            StartCoroutine( WaitBeforeSpawningNewGift());
         }
     }
 
-    IEnumerator DeleteGift()
+    IEnumerator WaitBeforeSpawningNewGift()
     {
-        yield return new WaitForSeconds(1f);
-        
-        if (_giftInstance != null) 
-        {
-            Destroy(_giftInstance);
-        }
+        yield return new WaitForSeconds(1.5f);
 
         _canSpawnGift = true;
     }

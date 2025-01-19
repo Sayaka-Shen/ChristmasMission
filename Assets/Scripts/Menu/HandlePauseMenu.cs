@@ -21,11 +21,13 @@ public class HandlePauseMenu : MonoBehaviour
         if (pauseMenu.activeSelf)
         {
             pauseMenu.SetActive(false);
+            Cursor.visible = false;
             Time.timeScale = 1f;
         }
         else
         {
             pauseMenu.SetActive(true);   
+            Cursor.visible = true;
             Time.timeScale = 0f;
         }
     }
@@ -34,6 +36,7 @@ public class HandlePauseMenu : MonoBehaviour
     public void CloseMenu()
     {
         pauseMenu.SetActive(false);
+        Cursor.visible = false;
         Time.timeScale = 1f;
     }
 }

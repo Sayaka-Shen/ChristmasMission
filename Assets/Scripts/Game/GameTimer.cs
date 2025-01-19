@@ -62,8 +62,6 @@ public class GameTimer : MonoBehaviour
                 timerText.text = "";
                 
                 AddEndMenu();
-
-                StartCoroutine(WaitForThePlayerToSeeResult());
             }
         }
     }
@@ -78,10 +76,13 @@ public class GameTimer : MonoBehaviour
         return classicTime;
     }
 
-    private void AddEndMenu()
+    public void AddEndMenu()
     {
         endMenu.SetActive(true);
+        Cursor.visible = true;
         pointMade.text = "Points Obtenus: " + pointSystem.TotalPoints.ToString();
+        
+        StartCoroutine(WaitForThePlayerToSeeResult());
     }
 
     IEnumerator WaitForThePlayerToSeeResult()

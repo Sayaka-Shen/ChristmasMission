@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class HouseSpawner : MonoBehaviour
@@ -9,6 +8,7 @@ public class HouseSpawner : MonoBehaviour
     [SerializeField] private float maxTime;
     [SerializeField] private Camera cameraObject;
     private float _timer;
+    private int _randomSpaceWithCamera;
     
     [Header("Chimney Collision Settings")]
     [SerializeField] private PointSystem pointSystem;
@@ -28,8 +28,10 @@ public class HouseSpawner : MonoBehaviour
         
         _timer += Time.deltaTime;
         
+        
+        _randomSpaceWithCamera = Random.Range(8, 20);
         Vector3 cameraPosition = cameraObject.transform.position;
-        transform.position = new Vector3(cameraPosition.x + 12, transform.position.y, transform.position.z);
+        transform.position = new Vector3(cameraPosition.x + _randomSpaceWithCamera, transform.position.y, transform.position.z);
     }
 
     private void SpawnHouse()

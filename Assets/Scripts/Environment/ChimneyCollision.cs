@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class ChimneyCollision : MonoBehaviour
@@ -12,5 +13,7 @@ public class ChimneyCollision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         OnChimneyCollision?.Invoke(PointAdded);
+
+        Destroy(collision.gameObject);  
     }
 }
